@@ -1,0 +1,11 @@
+/target/
+*.class
+*.war
+.settings/
+.classpath
+.project
+.springBeans
+.vscode/
+.DS_Store
+bin/
+logs/
