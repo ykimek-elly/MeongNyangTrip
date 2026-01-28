@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team.meongnyang.mapper.MemberMapper">
+
+    <select id="selectMemberById" resultType="com.team.meongnyang.dto.MemberDTO">
+        SELECT * FROM member WHERE id = #{id}
+    </select>
+
+    <insert id="insertMember" parameterType="com.team.meongnyang.dto.MemberDTO">
+        INSERT INTO member (
+            id, password, nickname, 
+            dog_name, dog_size, dog_breed, 
+            personality, preferred_place, 
+            reg_date
+        ) VALUES (
+            #{id}, #{password}, #{nickname}, 
+            #{dogName}, #{dogSize}, #{dogBreed}, 
+            #{personality}, #{preferredPlace}, 
+            NOW()
+        )
+    </insert>
+    
+    <select id="findId" parameterType="com.team.meongnyang.dto.MemberDTO" resultType="String">
+        SELECT id FROM member 
+        WHERE nickname = #{nickname} AND dog_name = #{dogName}
+    </select>
+
+    <select id="findPassword" parameterType="com.team.meongnyang.dto.MemberDTO" resultType="String">
+        SELECT password FROM member 
+        WHERE id = #{id} AND dog_name = #{dogName}
+    </select>
+
+</mapper>

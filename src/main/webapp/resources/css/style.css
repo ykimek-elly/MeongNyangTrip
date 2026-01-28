@@ -1,0 +1,219 @@
+/* [공통] 레이아웃 및 폰트 */
+html {
+    scrollbar-gutter: stable;
+}
+body { font-family: 'Pretendard', sans-serif; background-color: #f1f1f1; margin: 0; }
+.mobile-container {
+    max-width: 600px; margin: 0 auto; min-height: 100vh;
+    background: white; padding-bottom: 80px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05); position: relative;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* [공통] 유틸리티 및 입력창 */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; }
+
+/* [홈] 로고 애니메이션 */
+@keyframes simbol-bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+    60% { transform: translateY(-2.5px); }
+}
+@keyframes logo-dissolve {
+    0% { opacity: 0; filter: blur(2px); }
+    100% { opacity: 1; filter: blur(0); }
+}
+.simbol-motion { width: 24px; height: auto; animation: simbol-bounce 1.5s ease infinite; }
+.logo-text-dissolve { height: 16px; width: auto; opacity: 0; animation: logo-dissolve 1.2s ease-out forwards; animation-delay: 0.6s; }
+
+/* [리스트] 스타일 */
+#placeList { display: flex; flex-direction: column; gap: 0.75rem; }
+.place-card { display: flex; align-items: center; padding: 10px; background: white; border-radius: 20px; border: 1px solid #f1f5f9; }
+.place-img { width: 90px; height: 90px; min-width: 90px; object-fit: cover; border-radius: 16px; margin-right: 12px; }
+
+/* [리스트] 그리드 모드 전환 */
+#placeList.grid-mode { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+#placeList.grid-mode .place-card { flex-direction: column; align-items: flex-start; padding: 0.75rem; height: 100%; width: 100%; }
+#placeList.grid-mode .place-img { width: 100%; height: 10rem; margin-right: 0; margin-bottom: 0.75rem; border-radius: 0.75rem; }
+
+/* [상세] 태그 스타일 */
+.facility-tag { background-color: #f8f9fa; color: #4b5563; padding: 10px 18px; border-radius: 100px; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px; margin-right: 6px; border: 1px solid #f1f5f9; }
+
+/* =========================================
+   [상세 페이지] 레이아웃 및 버튼
+========================================= */
+
+/* 주소 및 지도보기 버튼 */
+.address-container {
+    display: flex; justify-content: space-between; align-items: center;
+    background-color: #f9fafb; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;
+}
+.btn-toggle-map {
+    display: flex; align-items: center; color: #e46a9b;
+    font-weight: 700; font-size: 14px; background: none; border: none; cursor: pointer; white-space: nowrap;
+}
+
+/* 아이콘 메뉴 (전화, 인스타 등) */
+.action-grid {
+    display: flex; justify-content: center; gap: 40px; padding: 24px 0;
+    border-top: 1px solid #f1f5f9; margin-bottom: 30px;
+}
+.action-icon-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    text-decoration: none; color: #6b7280; font-size: 13px; font-weight: 500;
+}
+
+/* 리뷰 별점 */
+.star-rating { display: flex; align-items: center; gap: 4px; }
+.star-rating i { cursor: pointer; transition: transform 0.1s; }
+.star-rating i:hover { transform: scale(1.2); }
+.star-rating .text-yellow-400 { fill: #facc15; color: #facc15; }
+
+/* [통합] 리뷰 등록 버튼 (기존 회색 스타일 제거하고 핑크색으로 통일) */
+.btn-review-custom {
+    background-color: #e46a9b;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(228, 106, 155, 0.3);
+    transition: transform 0.2s, background-color 0.2s;
+    cursor: pointer;
+}
+.btn-review-custom:hover {
+    background-color: #d65a8a;
+    transform: scale(1.02);
+}
+
+/* [통합] 예약 버튼 (하단 고정 스타일 포함) */
+.btn-reservation-container {
+    position: fixed; bottom: 80px; left: 0; right: 0; margin: 0 auto;
+    max-width: 600px; padding: 16px 24px; z-index: 50;
+    background: transparent; border: none; pointer-events: none;
+    transform: translateY(200%);
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.btn-reservation-container.show {
+    transform: translateY(0); pointer-events: auto;
+}
+.btn-reservation {
+    width: 100%; background-color: #e46a9b; color: white;
+    font-weight: 700; padding: 16px; border-radius: 16px; border: none;
+    font-size: 16px; cursor: pointer;
+    box-shadow: 0 10px 25px rgba(228, 106, 155, 0.5);
+}
+
+
+/* =========================================
+   [라운지 & 지도] 전용 스타일
+========================================= */
+
+/* 탭 메뉴 */
+.lounge-tab-container {
+    display: flex; width: 100%; background: white; border-bottom: 1px solid #f1f5f9;
+    position: relative; height: 54px;
+}
+.tab-btn {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+    height: 100%; font-size: 15px; font-weight: 500; color: #9ca3af;
+    cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s;
+}
+.tab-btn.active { color: #111827; font-weight: 700; border-bottom: 2px solid #111827; }
+.view-toggle-btn-wrapper {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%); z-index: 10;
+}
+
+/* [모드 1] 피드 모드 (1단) */
+.masonry-grid { display: block !important; padding: 16px; width: 100%; box-sizing: border-box; }
+.masonry-item {
+    background: white; border: none; border-bottom: 1px solid #f1f5f9;
+    border-radius: 0; margin-bottom: 24px; padding-bottom: 24px;
+    overflow: hidden; width: 100%;
+}
+.masonry-item > img { width: 100%; height: auto !important; object-fit: cover; display: block; }
+.feed-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 4px; }
+.feed-header img {
+    width: 32px !important; height: 32px !important; border-radius: 50% !important;
+    object-fit: cover !important; margin-right: 8px; background-color: #f3f4f6; display: block;
+}
+.feed-actions { display: flex; align-items: center; gap: 16px; padding: 12px 4px; }
+.feed-body { display: block; padding: 0 4px; }
+.grid-info { display: none; }
+
+/* [모드 2] 그리드 모드 (2단) */
+.masonry-grid.grid-mode {
+    display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px; padding: 16px;
+}
+.masonry-grid.grid-mode .masonry-item {
+    width: auto !important; border: 1px solid #f1f5f9; border-radius: 12px;
+    margin-bottom: 0; padding-bottom: 0; display: flex; flex-direction: column;
+}
+.masonry-grid.grid-mode .masonry-item > img {
+    width: 100%; height: 180px !important; border-radius: 12px 12px 0 0; aspect-ratio: auto;
+}
+.masonry-grid.grid-mode .feed-header,
+.masonry-grid.grid-mode .feed-actions,
+.masonry-grid.grid-mode .feed-body { display: none !important; }
+.masonry-grid.grid-mode .grid-info { display: block !important; padding: 12px; }
+
+/* 그리드 내부 텍스트 */
+.grid-stars { color: #3b82f6; font-size: 11px; margin-bottom: 4px; }
+.grid-title { font-size: 13px; font-weight: bold; color: #1f2937; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.grid-date { font-size: 11px; color: #9ca3af; margin-bottom: 8px; }
+.grid-footer { display: flex; align-items: center; gap: 6px; border-top: 1px solid #f3f4f6; padding-top: 8px; }
+.grid-footer img { width: 20px !important; height: 20px !important; border-radius: 4px !important; }
+.grid-footer-text { font-size: 11px; color: #6b7280; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* 실시간 톡 & 지도 스타일 */
+.talk-notice { background-color: #fff1f2; border-radius: 16px; padding: 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.talk-card { padding: 16px; border-radius: 16px; margin-bottom: 12px; position: relative; }
+.talk-card.bg-yellow { background-color: #fffbeb; border: 1px solid #fef3c7; }
+.talk-card.bg-red    { background-color: #fef2f2; border: 1px solid #fee2e2; }
+.talk-card.bg-blue   { background-color: #eff6ff; border: 1px solid #dbeafe; }
+.talk-card.bg-green  { background-color: #f0fdf4; border: 1px solid #dcfce7; }
+
+.map-overlay-top { position: absolute; top: 10px; left: 16px; right: 16px; z-index: 20; }
+.map-search-box { background: white; border-radius: 50px; padding: 12px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; align-items: center; margin-bottom: 12px; }
+.map-tags-wrapper { overflow-x: auto; white-space: nowrap; padding-bottom: 5px; }
+.map-pill { display: inline-block; padding: 6px 14px; border-radius: 50px; background: white; font-size: 13px; font-weight: 700; color: #4b5563; margin-right: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid white; }
+.map-pill.active { background-color: #e46a9b; color: white; border-color: #e46a9b; }
+
+/* [수정] 라운지 글쓰기 플로팅 버튼 (FAB) - 기존 중복 코드 통합 */
+.fab-pink {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    z-index: 50;
+    
+    width: 56px;
+    height: 56px;
+    background-color: #FF4D8D; /* 핑크색 강조 */
+    border-radius: 50%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    box-shadow: 0 4px 10px rgba(255, 77, 141, 0.4);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s;
+}
+.fab-pink:hover { transform: scale(1.05); background-color: #ff337d; }
+.fab-pink:active { transform: scale(0.95); }
+
+/* PC 화면 대응 */
+@media (min-width: 640px) {
+    .fab-pink {
+        right: auto; left: 60%; margin-left: 150px;
+    }
+}
+
+/* =========================================
+   [회원가입] 전용 스타일
+========================================= */
+optgroup { color: #111827 !important; font-weight: 700; background-color: #f9fafb; }
+option { color: #111827; background-color: #ffffff; }
+.fade-in-up { animation: fadeInUp 0.4s ease-out; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

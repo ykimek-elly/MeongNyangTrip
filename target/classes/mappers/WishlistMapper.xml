@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team.meongnyang.mapper.WishlistMapper">
+
+    <insert id="insertWish">
+        INSERT INTO wishlist (member_id, place_id)
+        VALUES (#{memberId}, #{placeId})
+    </insert>
+
+    <delete id="deleteWish">
+        DELETE FROM wishlist 
+        WHERE member_id = #{memberId} AND place_id = #{placeId}
+    </delete>
+
+    <select id="checkWish" resultType="int">
+        SELECT COUNT(*) 
+        FROM wishlist 
+        WHERE member_id = #{memberId} AND place_id = #{placeId}
+    </select>
+    
+    <select id="selectMyWishList" resultType="int">
+        SELECT place_id 
+        FROM wishlist 
+        WHERE member_id = #{memberId}
+        ORDER BY no DESC
+    </select>
+    
+    <select id="selectWishlistPlaces" resultType="com.team.meongnyang.dto.PlaceDTO">
+        SELECT p.*
+        FROM place p
+        JOIN wishlist w ON p.id = w.place_id
+        WHERE w.member_id = #{memberId}
+        ORDER BY w.no DESC
+    </select>
+
+</mapper>
